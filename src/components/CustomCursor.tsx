@@ -5,11 +5,16 @@ import React, { useEffect, useState } from "react";
 const CustomCursor: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
+  const [isTouch, setIsTouch] = useState(true); // assume touch until proven otherwise
 
   useEffect(() => {
+    // Only enable cursor on pointer devices (mouse), not touch screens
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    setIsTouch(isTouchDevice);
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      
       const target = e.target as HTMLElement;
       setIsPointer(
         window.getComputedStyle(target).cursor === "pointer" ||
@@ -21,6 +26,9 @@ const CustomCursor: React.FC = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  // Don't render anything on touch/mobile devices
+  if (isTouch) return null;
 
   return (
     <>

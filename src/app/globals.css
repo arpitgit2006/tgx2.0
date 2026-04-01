@@ -153,7 +153,10 @@ body {
   font-family: var(--serif);
   overflow-x: hidden;
   line-height: 1.75;
-  cursor: none;
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
 }
 
 /* ─── BACKGROUND ─────────────────────────── */
