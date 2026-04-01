@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShieldAlert, Moon, Sun, User } from "lucide-react";
+import { ShieldAlert, Moon, Sun, User, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import FlagIcon from "./FlagIcon";
@@ -15,6 +15,7 @@ export default function Navbar() {
     const { locale, setLocale, t } = useLanguage();
     const [mounted, setMounted] = useState(false);
     const [showLang, setShowLang] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -123,7 +124,54 @@ export default function Navbar() {
                 >
                     Agent Access
                 </Link>
+
+                {/* Mobile Menu Toggle */}
+                <button 
+                    className="md:hidden p-2 border border-[var(--border-dim)] rounded-full text-[var(--text-dim)] hover:text-[var(--gold2)] hover:border-[var(--border-gold)] transition-all"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
             </div>
+
+            {/* Mobile Sidebar Overlay */}
+            {isMobileMenuOpen && (
+                <div 
+                    className="fixed inset-0 top-[76px] bg-black/50 backdrop-blur-sm z-[190] md:hidden"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                >
+                    <div 
+                        className="absolute right-0 top-0 bottom-0 w-64 h-full bg-[rgba(8,11,26,0.95)] border-l border-[var(--border-gold)] p-8 shadow-2xl animate-in slide-in-from-right"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <ul className="flex flex-col gap-6">
+                            {links.map((link) => {
+                                const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
+                                return (
+                                    <li key={link.name}>
+                                        <Link
+                                            href={link.href}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className={`font-serif italic text-xl tracking-wider transition-colors duration-200 block ${
+                                                isActive ? "text-[var(--gold2)]" : "text-[var(--text-mid)] hover:text-[var(--gold2)]"
+                                            }`}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                        <Link 
+                            href="/auth" 
+                            className="nav-cta sm:hidden mt-8 w-full text-center py-3"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Agent Access
+                        </Link>
+                    </div>
+                </div>
+            )}
         </nav>
     );
 }

@@ -50,7 +50,7 @@ export default function Home() {
             {t('hero_desc')}
           </p>
 
-          <div className="hero-strip reveal d4 flex flex-col sm:flex-row gap-12 sm:gap-20 bg-[rgba(13,17,48,0.55)] border-y border-[var(--border-gold)] py-8 px-14">
+          <div className="hero-strip reveal d4 flex flex-col sm:flex-row gap-8 sm:gap-20 bg-[rgba(13,17,48,0.55)] border-y border-[var(--border-gold)] py-8 px-6 sm:px-14 w-full sm:w-auto">
             <div className="flex flex-col items-center">
               <div className="h-stat-n text-4xl font-bold text-[var(--gold2)]">600M+</div>
               <div className="h-stat-l text-[10px] italic text-[var(--text-dim)] uppercase tracking-wider mt-2">Indian Users</div>
@@ -69,7 +69,7 @@ export default function Home() {
             <Link href="/dashboard" className="mission-cta">
               {t('explore')} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
-            <Link href="/lab" className="px-10 py-4 border border-[var(--border-gold)] text-[var(--gold2)] font-serif italic text-sm hover:bg-[var(--gold-faint)] transition-all">
+            <Link href="/lab" className="px-6 py-3 sm:px-10 sm:py-4 border border-[var(--border-gold)] text-[var(--gold2)] font-serif italic text-sm hover:bg-[var(--gold-faint)] transition-all">
               {t('get_started')}
             </Link>
           </div>
@@ -80,7 +80,7 @@ export default function Home() {
 
       {/* ═══ CRISIS SECTION ══════════════════════════════ */}
       <section className="py-32 px-6 max-w-[1260px] mx-auto w-full">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           <div>
             <div className="sec-tag reveal">The Problem</div>
             <div className="sec-old reveal d1">A Nation Under Siege</div>
@@ -93,7 +93,7 @@ export default function Home() {
               where others see chaos.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 md:mt-0">
             <div className="scard scard-red reveal">
               <div className="snum text-4xl font-bold mb-2">30+</div>
               <div className="slbl text-xs italic text-[var(--text-mid)]">Mob lynchings from forwards</div>
@@ -123,7 +123,7 @@ export default function Home() {
           <div className="sec-old reveal d1">From Doubt to Certainty</div>
           <h2 className="sec-title reveal d2 max-w-2xl mx-auto text-4xl md:text-5xl font-bold">Verify Content in Seconds</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-1">
           <div className="step reveal">
             <div className="step-n">01</div>
             <div className="step-ico text-3xl mb-4">📋</div>
@@ -155,7 +155,7 @@ export default function Home() {
 
       {/* ═══ SCORE SECTION ═══════════════════════════════ */}
       <section className="py-32 px-6 max-w-[1260px] mx-auto w-full pb-48">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div>
                 <div className="sec-tag reveal">Evaluation</div>
                 <div className="sec-old reveal d1">Precise Verdicts</div>

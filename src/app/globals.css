@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
 html {
-  font-size: 22px;
+  font-size: 16px; /* Base size for mobile */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 22px; /* Scale everything up smoothly on tablets & desktop */
+  }
 }
 
 :root {
@@ -261,7 +267,7 @@ body {
 
 .hero-badge { display: inline-block; padding: 0.25rem 1rem; border: 1px solid var(--border-gold); background: var(--glass-gold); color: var(--gold2); border-radius: 9999px; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem; }
 .hero-old { font-family: var(--old); font-size: 1.5rem; color: var(--rose2); margin-bottom: 1rem; }
-.hero-h1 { font-size: 5rem; font-weight: 900; line-height: 1; letter-spacing: -0.05em; }
+.hero-h1 { font-size: clamp(3rem, 10vw, 5rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.05em; }
 .hero-h1 .t1 { color: var(--text); }
 .hero-h1 .t2 { color: var(--gold2); font-family: var(--serif); font-style: italic; }
 
@@ -275,7 +281,8 @@ body {
 .sec-old { font-family: var(--old); font-size: 1.25rem; color: var(--teal); margin-bottom: 1rem; }
 .divider { width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, var(--border-dim), transparent); margin: 0 auto; }
 
-.scard { padding: 2rem; border-radius: 1rem; background: var(--glass-base); border: 1px solid var(--border-dim); transition: transform 0.2s; }
+.scard { padding: 1.25rem; border-radius: 1rem; background: var(--glass-base); border: 1px solid var(--border-dim); transition: transform 0.2s; }
+@media (min-width: 768px) { .scard { padding: 2rem; } }
 .scard:hover { transform: translateY(-5px); }
 .scard-red { border-top: 2px solid var(--red); }
 .scard-amber { border-top: 2px solid var(--amber); }
