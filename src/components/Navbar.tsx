@@ -42,18 +42,18 @@ export default function Navbar() {
     if (!mounted) return null;
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-[200] px-6 md:px-12 py-4 flex items-center justify-between bg-[rgba(8,11,26,0.75)] backdrop-blur-[28px] border-b border-[var(--border-gold)]">
+        <nav className="fixed top-0 left-0 right-0 z-[200] px-3 sm:px-6 md:px-12 py-3 md:py-4 flex items-center justify-between bg-[rgba(8,11,26,0.75)] backdrop-blur-[28px] border-b border-[var(--border-gold)]">
             {/* Left: Language & Logo */}
             <div className="flex items-center gap-8">
                 {/* Logo & Flag */}
-                <div className="flex items-center gap-6">
-                    <Link href="/" className="nav-logo group relative text-2xl md:text-3xl">
+                <div className="flex items-center gap-2 sm:gap-6">
+                    <Link href="/" className="nav-logo group relative text-[1.15rem] sm:text-2xl md:text-3xl">
                         <span className="relative z-10 transition-all duration-500 group-hover:tracking-[5px] font-old">
                             TruthGuard
                         </span>
                         <div className="absolute -inset-2 bg-[var(--gold2)]/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                     </Link>
-                    <FlagIcon className="w-8 h-5 opacity-100 brightness-125 shadow-xl" />
+                    <FlagIcon className="w-5 h-3 sm:w-8 sm:h-5 opacity-100 brightness-125 shadow-xl" />
                 </div>
 
                 {/* Desktop Links */}
@@ -77,12 +77,12 @@ export default function Navbar() {
             </div>
 
             {/* Right: Lang, Theme, CTA */}
-            <div className="flex items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-2 sm:gap-4 md:gap-8">
                 {/* Language Selector */}
                 <div className="relative">
                     <button 
                         onClick={() => setShowLang(!showLang)}
-                        className="w-10 h-10 rounded-full flex items-center justify-center border border-[var(--border-gold)] bg-[var(--glass-gold)] text-[var(--gold2)] hover:scale-110 transition-all font-serif italic text-xs shadow-[0_0_15px_rgba(212,168,67,0.15)]"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-[var(--border-gold)] bg-[var(--glass-gold)] text-[var(--gold2)] hover:scale-110 transition-all font-serif italic text-[10px] sm:text-xs shadow-[0_0_15px_rgba(212,168,67,0.15)]"
                     >
                         {languages.find(l => l.code === locale)?.name}
                     </button>
@@ -112,7 +112,7 @@ export default function Navbar() {
                 {/* Theme Toggle (Minimalist) */}
                 <button 
                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    className="p-2 border border-[var(--border-dim)] rounded-full text-[var(--text-dim)] hover:text-[var(--gold2)] hover:border-[var(--border-gold)] transition-all"
+                    className="p-1.5 sm:p-2 border border-[var(--border-dim)] rounded-full text-[var(--text-dim)] hover:text-[var(--gold2)] hover:border-[var(--border-gold)] transition-all"
                 >
                     {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 </button>
@@ -127,7 +127,7 @@ export default function Navbar() {
 
                 {/* Mobile Menu Toggle */}
                 <button 
-                    className="md:hidden p-2 border border-[var(--border-dim)] rounded-full text-[var(--text-dim)] hover:text-[var(--gold2)] hover:border-[var(--border-gold)] transition-all"
+                    className="md:hidden p-1.5 sm:p-2 border border-[var(--border-dim)] rounded-full text-[var(--text-dim)] hover:text-[var(--gold2)] hover:border-[var(--border-gold)] transition-all"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
