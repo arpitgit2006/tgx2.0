@@ -137,14 +137,22 @@ export default function Navbar() {
             {/* Mobile Sidebar Overlay */}
             {isMobileMenuOpen && (
                 <div 
-                    className="fixed inset-0 top-[76px] bg-black/50 backdrop-blur-sm z-[190] md:hidden"
+                    className="fixed inset-0 top-0 bg-black/70 z-[190] md:hidden"
                     onClick={() => setIsMobileMenuOpen(false)}
                 >
                     <div 
-                        className="absolute right-0 top-0 bottom-0 w-64 h-full bg-[rgba(8,11,26,0.95)] border-l border-[var(--border-gold)] p-8 shadow-2xl animate-in slide-in-from-right"
+                        className="absolute right-0 top-0 bottom-0 w-[280px] h-full shadow-2xl animate-in slide-in-from-right"
+                        style={{ background: '#080B1A', borderLeft: '1px solid var(--border-gold)' }}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <ul className="flex flex-col gap-6">
+                        {/* Sidebar Header */}
+                        <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border-gold)]">
+                            <span className="font-serif italic text-[var(--gold2)] text-sm tracking-widest uppercase">Navigation</span>
+                            <button onClick={() => setIsMobileMenuOpen(false)} className="text-[var(--text-dim)] hover:text-[var(--gold2)]">
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <ul className="flex flex-col gap-1 p-4 mt-2">
                             {links.map((link) => {
                                 const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
                                 return (
@@ -152,8 +160,10 @@ export default function Navbar() {
                                         <Link
                                             href={link.href}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className={`font-serif italic text-xl tracking-wider transition-colors duration-200 block ${
-                                                isActive ? "text-[var(--gold2)]" : "text-[var(--text-mid)] hover:text-[var(--gold2)]"
+                                            className={`font-serif italic text-lg tracking-wider transition-all duration-200 block px-4 py-3 rounded-lg ${
+                                                isActive 
+                                                    ? "text-[var(--gold2)] bg-[var(--gold-dim)] border border-[var(--border-gold)]" 
+                                                    : "text-[var(--text-mid)] hover:text-[var(--gold2)] hover:bg-white/5"
                                             }`}
                                         >
                                             {link.name}
@@ -162,13 +172,15 @@ export default function Navbar() {
                                 );
                             })}
                         </ul>
-                        <Link 
-                            href="/auth" 
-                            className="nav-cta sm:hidden mt-8 w-full text-center py-3"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Agent Access
-                        </Link>
+                        <div className="px-4 mt-4">
+                            <Link 
+                                href="/auth" 
+                                className="nav-cta block text-center py-3 px-4"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Agent Access
+                            </Link>
+                        </div>
                     </div>
                 </div>
             )}
