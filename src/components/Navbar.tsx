@@ -42,7 +42,7 @@ export default function Navbar() {
     if (!mounted) return null;
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-[200] px-3 sm:px-6 md:px-12 py-3 md:py-4 flex items-center justify-between bg-[rgba(8,11,26,0.75)] backdrop-blur-[28px] border-b border-[var(--border-gold)]">
+        <nav className="fixed top-0 left-0 right-0 z-[200] px-3 sm:px-6 md:px-12 py-3 md:py-4 flex items-center justify-between border-b border-[var(--border-gold)]" style={{background: '#080B1A'}}>
             {/* Left: Language & Logo */}
             <div className="flex items-center gap-8">
                 {/* Logo & Flag */}
@@ -142,7 +142,7 @@ export default function Navbar() {
                 >
                     <div 
                         className="absolute right-0 top-0 bottom-0 w-[280px] h-full shadow-2xl animate-in slide-in-from-right"
-                        style={{ background: '#080B1A', borderLeft: '1px solid var(--border-gold)' }}
+                        style={{ background: '#080B1A', borderLeft: '2px solid var(--border-gold)' }}
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Sidebar Header */}
