@@ -27,6 +27,7 @@ import { Providers } from "./Providers";
 import BackgroundLayers from "@/components/BackgroundLayers";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
+import FlagIcon from "@/components/FlagIcon";
 
 export default function RootLayout({
   children,
@@ -40,6 +41,10 @@ export default function RootLayout({
       >
         <BackgroundLayers />
         <CustomCursor />
+        {/* Flag always floats above everything */}
+        <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 pointer-events-none opacity-90 brightness-150" style={{zIndex: 2147483647}}>
+          <FlagIcon className="w-10 h-6 md:w-16 md:h-10 shadow-2xl skew-x-2" />
+        </div>
         <Providers>
           <Navbar />
           <main className="flex-grow flex flex-col relative z-10">

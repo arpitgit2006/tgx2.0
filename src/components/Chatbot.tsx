@@ -48,7 +48,7 @@ export default function Chatbot() {
   }
 
   return (
-    <div className="flex flex-col h-[70vh] w-full max-w-4xl mx-auto rounded-xl border border-neo-cyan/30 neo-glass overflow-hidden shadow-[0_0_30px_rgba(0,229,255,0.1)]">
+    <div className="flex flex-col h-[70vh] w-full max-w-4xl mx-auto rounded-xl border border-[var(--teal)]/30 overflow-hidden shadow-[0_0_30px_rgba(31,207,207,0.1)]" style={{background: 'rgba(8,11,26,0.97)', backdropFilter: 'blur(28px)'}}>
       {/* Header */}
       <div className="bg-neo-cyan/10 border-b border-neo-cyan/20 px-6 py-4 flex items-center justify-between">
         <h2 className="text-xl font-display font-semibold text-white tracking-widest flex items-center gap-3">
@@ -84,10 +84,10 @@ export default function Chatbot() {
               
               {/* Bubble */}
               <div
-                className={`px-5 py-3 rounded-2xl align-top whitespace-pre-wrap font-body text-[15px] leading-relaxed
+                className={`px-5 py-3 rounded-2xl align-top whitespace-pre-wrap font-serif text-[15px] leading-relaxed
                   ${msg.role === "user" 
-                    ? "bg-neo-cyan/10 border border-neo-cyan/30 text-white rounded-tr-none" 
-                    : "bg-surface-2 border border-border-gold/30 text-text-light rounded-tl-none shadow-md"
+                    ? "bg-[var(--teal-dim)] border border-[var(--teal)]/30 text-[var(--text)] rounded-tr-none" 
+                    : "bg-[var(--bg3)] border border-[var(--border-gold)]/40 text-[var(--text)] rounded-tl-none shadow-md"
                   }`}
               >
                 {msg.text}
@@ -111,7 +111,7 @@ export default function Chatbot() {
       </div>
 
       {/* Input Box */}
-      <div className="p-4 bg-surface-1 border-t border-neo-cyan/20">
+      <div className="p-4 border-t border-[var(--teal)]/20" style={{background: 'rgba(13,17,48,1)'}}>
         <div className="relative flex items-center w-full group">
           <input
             ref={inputRef}
@@ -121,12 +121,13 @@ export default function Chatbot() {
             onChange={(e) => setQuestion(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAsk()}
             placeholder="Type your query here..."
-            className="flex-1 bg-bg-main border border-border-gold/40 text-white rounded-xl py-3 pl-4 pr-16 font-body text-[15px] focus:outline-none focus:border-neo-cyan focus:shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-all placeholder-muted-2 relative z-50 pointer-events-auto"
+            style={{background: 'rgba(8,11,26,1)', color: 'var(--text)'}}
+            className="flex-1 border border-[var(--border-gold)]/40 rounded-xl py-3 pl-4 pr-16 font-serif text-[15px] focus:outline-none focus:border-[var(--teal)] focus:shadow-[0_0_15px_rgba(31,207,207,0.2)] transition-all placeholder:text-[var(--text-dim)] relative z-50 pointer-events-auto"
           />
           <button
             onClick={handleAsk}
             disabled={loading || !question.trim()}
-            className="absolute right-2 px-3 py-1.5 bg-neo-cyan/10 hover:bg-neo-cyan/20 border border-neo-cyan/30 text-neo-cyan rounded-lg transition-all disabled:opacity-50 flex items-center justify-center cursor-pointer"
+            className="absolute right-2 px-3 py-1.5 bg-[var(--teal)]/10 hover:bg-[var(--teal)]/20 border border-[var(--teal)]/30 text-[var(--teal)] rounded-lg transition-all disabled:opacity-50 flex items-center justify-center cursor-pointer"
           >
             <Send className="w-5 h-5" />
           </button>
