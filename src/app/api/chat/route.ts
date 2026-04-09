@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const FREE_MODELS = [
+  "deepseek/deepseek-r1:free",
   "mistralai/mistral-7b-instruct:free",
-  "meta-llama/llama-3.1-8b-instruct:free",
   "google/gemma-2-9b-it:free",
-  "qwen/qwen-2-7b-instruct:free",
+  "microsoft/phi-3-mini-128k-instruct:free",
+  "meta-llama/llama-3.1-8b-instruct:free",
 ];
 
 const SYSTEM_PROMPT =
