@@ -7,9 +7,9 @@ export async function POST(req: NextRequest) {
   try {
     const { question } = await req.json();
 
-    if (!process.env.CHATBOT_API_KEY) {
+    if (!process.env.OPENROUTER_API_KEY) {
       return NextResponse.json(
-        { error: "API Key missing. Set CHATBOT_API_KEY in Vercel environment variables." },
+        { error: "API Key missing. Set OPENROUTER_API_KEY in Vercel environment variables." },
         { status: 401 }
       );
     }
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.CHATBOT_API_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
         "HTTP-Referer": "https://truthguard.vercel.app",
         "X-Title": "TruthGuard AI",
@@ -47,3 +47,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
