@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         "X-Title": "TruthGuard AI",
       },
       body: JSON.stringify({
-        model: "openai/gpt-oss-20b:free",
+        model: "meta-llama/llama-3.1-8b-instruct:free",
         messages: [
           {
             role: "system",
