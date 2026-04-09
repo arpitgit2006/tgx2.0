@@ -2,7 +2,7 @@ import Chatbot from "@/components/Chatbot";
 
 export default function ChatPage() {
   return (
-    <div className="min-h-screen bg-tg pt-20 pb-4 px-4 flex flex-col items-center">
+    <div className="min-h-screen pt-20 pb-4 px-4 flex flex-col items-center" style={{background: 'var(--bg)'}}>
       <div className="w-full max-w-5xl mb-4 space-y-1 text-center">
         <h1 className="text-3xl md:text-4xl font-display font-bold text-white tracking-wider">
           Digital <span className="text-neo-cyan">Assistant</span>
