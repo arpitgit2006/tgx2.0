@@ -1,25 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
-import Groq from "groq-sdk";
 
 export async function POST(req: NextRequest) {
   try {
     const { question } = await req.json();
 
-    if (!process.env.GROQ_API_KEY) {
-      return NextResponse.json({ error: "API Key missing in .env" }, { status: 401 });
+    if (!process.env.CHATBOT_API_KEY) {
+      return NextResponse.json({ error: "API Key missing. Set CHATBOT_API_KEY in environment variables." }, { status: 401 });
     }
 
-    const client = new Groq({
-      apiKey: process.env.GROQ_API_KEY,
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.CHATBOT_API_KEY}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://truthguard.vercel.app",
+        "X-Title": "TruthGuard AI",
+      },
+      body: JSON.stringify({
+        model: "openai/gpt-oss-20b:free",
+        messages: [
+          {
+            role: "system",
+            content: "You are TruthGuard AI, a cybersecurity assistant helping users with incident reporting, digital hygiene, evidence collection, deepfake detection, and cyber safety protocols. Be precise, professional, and helpful.",
+          },
+          { role: "user", content: question },
+        ],
+        max_tokens: 1024,
+      }),
     });
 
-    const response = await client.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      messages: [{ role: "user", content: question }],
-      max_tokens: 1024,
-    });
+    if (!response.ok) {
+      const errData = await response.json();
+      console.error("OpenRouter error:", errData);
+      return NextResponse.json({ error: errData?.error?.message || "Model API error" }, { status: response.status });
+    }
 
-    const answer = response.choices[0].message.content;
+    const data = await response.json();
+    const answer = data.choices?.[0]?.message?.content ?? "No response received.";
     return NextResponse.json({ answer });
 
   } catch (error: any) {

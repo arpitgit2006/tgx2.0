@@ -54,7 +54,7 @@ export default function Chatbot() {
         <h2 className="text-xl font-display font-semibold text-white tracking-widest flex items-center gap-3">
           <Bot className="text-neo-cyan w-6 h-6" /> TruthGuard AI Assist
         </h2>
-        <span className="text-xs font-mono text-neo-teal px-3 py-1 bg-neo-teal/10 rounded-full border border-neo-teal/30">Llama-3.3-70B</span>
+        <span className="text-xs font-mono text-neo-teal px-3 py-1 bg-neo-teal/10 rounded-full border border-neo-teal/30">GPT-OSS-20B</span>
       </div>
 
       {/* Message List */}
