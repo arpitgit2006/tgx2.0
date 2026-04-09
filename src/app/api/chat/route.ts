@@ -14,33 +14,47 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://truthguard.vercel.app",
-        "X-Title": "TruthGuard AI",
-      },
-      body: JSON.stringify({
-        model: "openai/gpt-oss-20b:free",
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: question },
-        ],
-        max_tokens: 1024,
-      }),
-    });
+    const models = [
+      "mistralai/mistral-7b-instruct",
+      "openai/gpt-3.5-turbo",
+      "meta-llama/llama-3.1-8b-instruct",
+    ];
 
-    if (!response.ok) {
-      const errData = await response.json();
-      console.error("OpenRouter error:", errData);
-      return NextResponse.json({ error: errData?.error?.message || "Model error" }, { status: response.status });
+    let answer = "No response received.";
+    let lastError = "All models failed.";
+
+    for (const model of models) {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://truthguard.vercel.app",
+          "X-Title": "TruthGuard AI",
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: question },
+          ],
+          max_tokens: 1024,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        lastError = errData?.error?.message || "Model error";
+        console.warn(`Model ${model} failed: ${lastError}`);
+        continue;
+      }
+
+      const data = await response.json();
+      answer = data.choices?.[0]?.message?.content ?? "No response received.";
+      return NextResponse.json({ answer });
     }
 
-    const data = await response.json();
-    const answer = data.choices?.[0]?.message?.content ?? "No response received.";
-    return NextResponse.json({ answer });
+    return NextResponse.json({ error: lastError }, { status: 503 });
 
   } catch (error: any) {
     console.error("Error:", error.message);
